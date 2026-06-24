@@ -20,6 +20,15 @@ public class Cliente {
     private String telefono;
     private String direccion;
 
+    public Cliente() {}
+
+    public Cliente(String nombre, String apellido, String correo, String telefono, String direccion) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.direccion = direccion;
+    }
 
     public Long getId() {
         return id;
