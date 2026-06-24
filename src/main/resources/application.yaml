@@ -1,9 +1,4 @@
 spring:
-
-  config:
-    import:
-      optinal:file:.env[.properties]
-
   application:
     name: tiendaonline
 
@@ -11,3 +6,14 @@ spring:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
+
+  # Para configurar la actualización automatica cuando una clase Entidad se le
+  # agregan nuevos campos
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  config:
+    import:
+      optional:file:.env[.properties]
