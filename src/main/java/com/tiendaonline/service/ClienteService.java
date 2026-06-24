@@ -5,6 +5,8 @@ import com.tiendaonline.dto.ClienteResponseDTO;
 import com.tiendaonline.mapper.ClienteMapper;
 import com.tiendaonline.model.Cliente;
 import com.tiendaonline.repository.ClienteRepository;
+
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,4 +38,5 @@ public class ClienteService {
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado con id: " + id));
         return ClienteMapper.toResponse(cliente);
     }
+
 }
