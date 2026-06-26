@@ -65,3 +65,9 @@ con el build system, etc)
    Solucion: Implementar una guardia segura en los servicios de clientes y
    productos que revise en la base de datos si ya existe información sensible
    repetida en el registro y asi no tener duplicados.
+
+2. [ ] Solo como ejercicio, decidi crear un endpoint en la API para poder
+   reiniciar la base de datos, a partir de Spring Boot ejecutando una query la
+   cual trunque las tablas correspondientes de las entidades definidas en la
+   aplicación
+
