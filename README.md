@@ -59,6 +59,9 @@ con el build system, etc)
 
 ## Problemas
 
-1. [ ] No existe un sistema el cual permita evitar elementos duplicados cuando
+1. [x] No existe un sistema el cual permita evitar elementos duplicados cuando
    se ingresan en la API (productos y clientes)
 
+   Solucion: Implementar una guardia segura en los servicios de clientes y
+   productos que revise en la base de datos si ya existe información sensible
+   repetida en el registro y asi no tener duplicados.

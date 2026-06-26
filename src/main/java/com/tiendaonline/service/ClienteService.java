@@ -1,5 +1,8 @@
 package com.tiendaonline.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.tiendaonline.dto.ClienteRequestDTO;
 import com.tiendaonline.dto.ClienteResponseDTO;
 import com.tiendaonline.mapper.ClienteMapper;
@@ -7,8 +10,6 @@ import com.tiendaonline.model.Cliente;
 import com.tiendaonline.repository.ClienteRepository;
 
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ClienteService {
@@ -20,10 +21,16 @@ public class ClienteService {
     }
 
 
-    public ClienteResponseDTO crear(ClienteRequestDTO dto) {
+    public Optional<ClienteResponseDTO> crear(ClienteRequestDTO dto) {
+        if (this.clienteRepository.existsByCorreoOrDireccionOrTelefono(
+            dto.getCorreo(), dto.getDireccion(), dto.getTelefono()
+        )) {
+            return Optional.empty();
+        }
+
         Cliente cliente = ClienteMapper.toEntity(dto);
         cliente = this.clienteRepository.save(cliente);
-        return ClienteMapper.toResponse(cliente);
+        return Optional.of(ClienteMapper.toResponse(cliente));
     }
 
     public List<ClienteResponseDTO> listar() {

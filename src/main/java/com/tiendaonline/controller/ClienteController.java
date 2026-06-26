@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 // Los controllers no deberian guardar información porque esa tarea corresponde
 // a la capa de la logica de negocio, cuya implementación queda fuera de la capa
@@ -30,8 +31,12 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<ClienteResponseDTO> crear(@RequestBody ClienteRequestDTO dto) {
-        ClienteResponseDTO response = this.clienteService.crear(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        Optional<ClienteResponseDTO> response = this.clienteService.crear(dto);
+
+        if (response.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(response.get());
     }
 
     @GetMapping

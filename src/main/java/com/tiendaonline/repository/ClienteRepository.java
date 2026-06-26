@@ -14,7 +14,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    boolean existeEmail(String email);
-    boolean existeNumero(String numero);
-    boolean existeDireccion(String direccion);
+    // El parser de los nombres de los metodos creados en la interface dentro de
+    // aquellas que extienden JpaRepository es bastante util, ya que incluso
+    // puede parsear palabras claves como "And" y "Or" para poder mapear el
+    // metodo a una query que use "WHERE"
+    //
+    // Esta seria igual a "SELECT 1 FROM clientes WHERE correo = <correo> OR dirreccion = <direccion> OR telefono = <telefono>"
+    boolean existsByCorreoOrDireccionOrTelefono(String correo, String direccion, String telefono);
 }
