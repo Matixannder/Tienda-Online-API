@@ -2,6 +2,7 @@ package com.tiendaonline.service;
 
 import com.tiendaonline.dto.ProductoRequestDTO;
 import com.tiendaonline.dto.ProductoResponseDTO;
+import com.tiendaonline.exception.ProductoDuplicadoException;
 import com.tiendaonline.mapper.ProductoMapper;
 import com.tiendaonline.model.Producto;
 import com.tiendaonline.repository.ProductoRepository;
@@ -18,29 +19,30 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
+
     public ProductoResponseDTO crear(ProductoRequestDTO dto) {
         Producto producto = ProductoMapper.toEntity(dto);
-        producto = productoRepository.save(producto);
+        producto = this.productoRepository.save(producto);
         return ProductoMapper.toResponse(producto);
     }
 
     public List<ProductoResponseDTO> listar() {
-        return productoRepository.findAll()
+        return this.productoRepository.findAll()
                 .stream()
                 .map(ProductoMapper::toResponse)
                 .toList();
     }
 
-    public ProductoResponseDTO buscarPorId(Long id) {
-        Producto producto = productoRepository.findById(id)
+public ProductoResponseDTO buscarPorId(Long id) {
+        Producto producto = this.productoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con id: " + id));
         return ProductoMapper.toResponse(producto);
     }
 
     public void eliminar(Long id) {
-        if (!productoRepository.existsById(id)) {
+        if (!this.productoRepository.existsById(id)) {
             throw new RuntimeException("Producto no encontrado con id: " + id);
         }
-        productoRepository.deleteById(id);
+        this.productoRepository.deleteById(id);
     }
 }

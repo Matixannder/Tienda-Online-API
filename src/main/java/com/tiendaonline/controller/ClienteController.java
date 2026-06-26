@@ -30,17 +30,17 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<ClienteResponseDTO> crear(@RequestBody ClienteRequestDTO dto) {
-        ClienteResponseDTO response = clienteService.crear(dto);
+        ClienteResponseDTO response = this.clienteService.crear(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
     public ResponseEntity<List<ClienteResponseDTO>> listar() {
-        return ResponseEntity.ok(clienteService.listar());
+        return ResponseEntity.ok(this.clienteService.listar());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClienteResponseDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(clienteService.buscarPorId(id));
+        return ResponseEntity.ok(this.clienteService.buscarPorId(id));
     }
 }

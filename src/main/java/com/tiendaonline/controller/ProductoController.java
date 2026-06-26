@@ -27,23 +27,23 @@ public class ProductoController {
 
     @PostMapping
     public ResponseEntity<ProductoResponseDTO> crear(@RequestBody ProductoRequestDTO dto) {
-        ProductoResponseDTO response = productoService.crear(dto);
+        ProductoResponseDTO response = this.productoService.crear(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping
     public ResponseEntity<List<ProductoResponseDTO>> listar() {
-        return ResponseEntity.ok(productoService.listar());
+        return ResponseEntity.ok(this.productoService.listar());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductoResponseDTO> buscarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(productoService.buscarPorId(id));
+        return ResponseEntity.ok(this.productoService.buscarPorId(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        productoService.eliminar(id);
+        this.productoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 }
