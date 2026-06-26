@@ -9,6 +9,7 @@ import com.tiendaonline.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductoService {
@@ -20,10 +21,14 @@ public class ProductoService {
     }
 
 
-    public ProductoResponseDTO crear(ProductoRequestDTO dto) {
+    public Optional<ProductoResponseDTO> crear(ProductoRequestDTO dto) {
+        if (this.productoRepository.existsByNombre(dto.getNombre())) {
+            return Optional.empty();
+        }
+
         Producto producto = ProductoMapper.toEntity(dto);
         producto = this.productoRepository.save(producto);
-        return ProductoMapper.toResponse(producto);
+        return Optional.of(ProductoMapper.toResponse(producto));
     }
 
     public List<ProductoResponseDTO> listar() {

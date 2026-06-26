@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/productos")
@@ -27,8 +28,17 @@ public class ProductoController {
 
     @PostMapping
     public ResponseEntity<ProductoResponseDTO> crear(@RequestBody ProductoRequestDTO dto) {
-        ProductoResponseDTO response = this.productoService.crear(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        if (dto.getStock() < 0) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+
+        Optional<ProductoResponseDTO> response = this.productoService.crear(dto);
+
+        if (response.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response.get());
     }
 
     @GetMapping
