@@ -2,7 +2,6 @@ package com.tiendaonline.service;
 
 import com.tiendaonline.dto.ProductoRequestDTO;
 import com.tiendaonline.dto.ProductoResponseDTO;
-import com.tiendaonline.exception.ProductoDuplicadoException;
 import com.tiendaonline.mapper.ProductoMapper;
 import com.tiendaonline.model.Producto;
 import com.tiendaonline.repository.ProductoRepository;

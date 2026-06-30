@@ -46,4 +46,17 @@ public class ClienteService {
         return ClienteMapper.toResponse(cliente);
     }
 
+    public ClienteResponseDTO buscarPorCorreo(String correo) {
+        Cliente cliente = this.clienteRepository.findByCorreo(correo)
+                .orElseThrow(() -> new RuntimeException("Correo no encontrado: " + correo));
+
+        return ClienteMapper.toResponse(cliente);
+    }
+
+    public ClienteResponseDTO buscarPorTelefono(String telefono) {
+        Cliente cliente = this.clienteRepository.findByTelefono(telefono)
+                .orElseThrow(() -> new RuntimeException("Ningun usuario esta vinculado al numero: " + telefono));
+
+        return ClienteMapper.toResponse(cliente);
+    }
 }

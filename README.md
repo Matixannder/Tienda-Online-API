@@ -71,3 +71,8 @@ con el build system, etc)
    cual trunque las tablas correspondientes de las entidades definidas en la
    aplicación
 
+3. [ ] Como ejercicio extra, decidi crear mas endpoints en el servidor para
+   añadir mas funcionalidades.
+
+- [ ] También empezare a integrar testeos de la aplicación
+

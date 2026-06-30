@@ -1,5 +1,7 @@
 package com.tiendaonline.repository;
 
+import java.util.Optional;
+
 import com.tiendaonline.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -21,4 +23,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     //
     // Esta seria igual a "SELECT 1 FROM clientes WHERE correo = <correo> OR dirreccion = <direccion> OR telefono = <telefono>"
     boolean existsByCorreoOrDireccionOrTelefono(String correo, String direccion, String telefono);
+    Optional<Cliente> findByCorreo(String correo);
+    Optional<Cliente> findByTelefono(String telefono);
 }
