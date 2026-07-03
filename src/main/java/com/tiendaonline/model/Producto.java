@@ -31,7 +31,7 @@ public class Producto {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -39,7 +39,7 @@ public class Producto {
     }
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -47,7 +47,7 @@ public class Producto {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion;
     }
 
     public void setDescripcion(String descripcion) {
@@ -55,7 +55,7 @@ public class Producto {
     }
 
     public Double getPrecio() {
-        return precio;
+        return this.precio;
     }
 
     public void setPrecio(Double precio) {
@@ -63,7 +63,7 @@ public class Producto {
     }
 
     public Integer getStock() {
-        return stock;
+        return this.stock;
     }
 
     public void setStock(Integer stock) {
@@ -71,7 +71,7 @@ public class Producto {
     }
 
     public String getCategoria() {
-        return categoria;
+        return this.categoria;
     }
 
     public void setCategoria(String categoria) {

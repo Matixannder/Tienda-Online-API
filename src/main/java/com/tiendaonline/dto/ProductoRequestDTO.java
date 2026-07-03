@@ -9,7 +9,7 @@ public class ProductoRequestDTO {
     private String categoria;
 
     public String getNombre() {
-        return nombre;
+        return this.nombre;
     }
 
     public void setNombre(String nombre) {
@@ -17,7 +17,7 @@ public class ProductoRequestDTO {
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return this.descripcion;
     }
 
     public void setDescripcion(String descripcion) {
@@ -25,7 +25,7 @@ public class ProductoRequestDTO {
     }
 
     public Double getPrecio() {
-        return precio;
+        return this.precio;
     }
 
     public void setPrecio(Double precio) {
@@ -33,7 +33,7 @@ public class ProductoRequestDTO {
     }
 
     public Integer getStock() {
-        return stock;
+        return this.stock;
     }
 
     public void setStock(Integer stock) {
@@ -41,7 +41,7 @@ public class ProductoRequestDTO {
     }
 
     public String getCategoria() {
-        return categoria;
+        return this.categoria;
     }
 
     public void setCategoria(String categoria) {
