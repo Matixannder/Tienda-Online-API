@@ -8,6 +8,7 @@ import com.tiendaonline.dto.ClienteResponseDTO;
 import com.tiendaonline.service.ClienteService;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,10 @@ public class ClienteController {
         Optional<ClienteResponseDTO> response = this.clienteService.crear(dto);
 
         if (response.isEmpty()) {
-            throw new ErrorResponseException(HttpStatus.CONFLICT, new Exception("Usuario ya ha sido creado"));
+            throw new ErrorResponseException(HttpStatus.CONFLICT, ProblemDetail.forStatusAndDetail(
+                HttpStatus.CONFLICT,
+                "Usuario ya ha sido creado"
+            ), null);
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(response.get());
     }
@@ -49,41 +53,60 @@ public class ClienteController {
     @GetMapping("/{id}")
     public ResponseEntity<ClienteResponseDTO> buscarPorId(@PathVariable Long id) {
         if (id == null || id <= 0) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND, new Exception("Id introducido es invalido"));
+            throw new ErrorResponseException(HttpStatus.NOT_FOUND, ProblemDetail.forStatusAndDetail(
+                HttpStatus.NOT_FOUND,
+                "ID invalida"
+            ), null);
         }
 
         try {
             return ResponseEntity.ok(this.clienteService.buscarPorId(id));
         } catch (RuntimeException e) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND, e);
+            throw new ErrorResponseException(HttpStatus.NOT_FOUND, ProblemDetail.forStatusAndDetail(
+                HttpStatus.NOT_FOUND,
+                e.getMessage()
+            ), null);
         }
     }
 
-    @GetMapping("/{correo}")
+    @GetMapping("correos/{correo}")
     public ResponseEntity<ClienteResponseDTO> buscarPorCorreo(@PathVariable String correo) {
         boolean isValidEmailFormat = correo.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
         if (correo == null || !isValidEmailFormat) {
-            throw new ErrorResponseException(HttpStatus.BAD_REQUEST, new Exception("Correo introducido no tiene un formato valido"));
+            throw new ErrorResponseException(HttpStatus.BAD_REQUEST, ProblemDetail.forStatusAndDetail(
+                HttpStatus.BAD_REQUEST,
+                "Formato de correo invalido"
+            ), null);
         }
 
         try {
             return ResponseEntity.ok(this.clienteService.buscarPorCorreo(correo));
         } catch (RuntimeException e) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND, e);
+            throw new ErrorResponseException(HttpStatus.NOT_FOUND, ProblemDetail.forStatusAndDetail(
+                HttpStatus.NOT_FOUND,
+                e.getMessage()
+            ), null);
         }
     }
 
-    @GetMapping("/{telefono}")
+    @GetMapping("telefonos/{telefono}")
     public ResponseEntity<ClienteResponseDTO> buscarPorTelefono(@PathVariable String telefono) {
         boolean isValidPhoneNumberFormat = telefono.matches("^\\+?\\d{7,15}$");
         if (telefono == null || !isValidPhoneNumberFormat) {
-            throw new ErrorResponseException(HttpStatus.BAD_REQUEST, new Exception("Numero telefonico introducido no es de un formato valido"));
+            throw new ErrorResponseException(
+                HttpStatus.BAD_REQUEST,
+                ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, "Numero telefonico con formato invalido"),
+                null
+            );
         }
 
         try {
             return ResponseEntity.ok(this.clienteService.buscarPorTelefono(telefono));
         } catch (RuntimeException e) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND, e);
+            throw new ErrorResponseException(HttpStatus.NOT_FOUND, ProblemDetail.forStatusAndDetail(
+                HttpStatus.NOT_FOUND,
+                e.getMessage()
+            ), null);
         }
     }
 }
