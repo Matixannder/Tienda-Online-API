@@ -6,9 +6,6 @@ import urllib.error
 
 BASE_URL = sys.argv[1] if len(sys.argv) > 1 else "http://localhost:8080"
 
-# TODO: fill with the credentials from the Spring Boot console output
-
-
 def get_email(path):
     req = urllib.request.Request(f"{BASE_URL}{path}", method="GET")
     try:
